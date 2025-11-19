@@ -71,3 +71,9 @@ export const updateReferralStatus = (id: string, status: ReferralStatus): void =
     localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
   }
 };
+
+export const deleteReferral = (id: string): void => {
+  const all = getReferrals();
+  const filtered = all.filter(r => r.ID !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+};

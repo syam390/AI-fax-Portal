@@ -1,5 +1,5 @@
 {
-  "name": "Copy of AI Fax Referral Portal",
-  "description": "An intelligent portal for processing medical fax referrals using Gemini AI to parse documents into structured JSON data.",
+  "name": "Zen AI Fax",
+  "description": "Enterprise-grade AI Fax Referral automation platform.",
   "requestFramePermissions": []
 }
