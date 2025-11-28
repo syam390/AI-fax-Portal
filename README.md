@@ -1,91 +1,225 @@
-# Zen AI Fax
+# 📘 **AI Fax Portal — README.md (Updated With Pending OpenAI Support)**
 
-**Intelligent Referral Automation Portal**
+# **AI Fax Portal**
 
-Zen AI Fax is an enterprise-grade web application designed to automate the processing of medical fax referrals. It leverages **Google Gemini 2.5 Flash** for multimodal AI analysis (OCR + NLP) to extract patient data from PDFs, Images, and Word documents, streamlining the intake process for healthcare providers.
+AI-powered Fax Extraction System using **React + TypeScript + OCR + Google Gemini (Active) + OpenAI (Ready, Not Yet Deployed)** + Azure
 
-## 🚀 Features
 
-- **AI-Powered Extraction**: Automatically identifies patient names, diagnosis codes, and referral details from messy documents (including handwritten notes).
-- **Multimodal Support**: Handles PDF, JPG/PNG images, and Word (.docx) files.
-- **Modern Dashboard**: "Inbox" style interface for managing referral status (Pending, Accepted, Rejected).
-- **Split-Screen Review**: efficient side-by-side view of the original document and extracted data.
-- **Azure Integration**: Built to deploy on Azure Static Web Apps with optional Azure Blob Storage integration.
+## 🚀 **Overview**
 
-## 🛠️ Tech Stack
+**AI Fax Portal** is a web application designed to automate the processing of fax documents used in healthcare workflows.
+The system digitizes faxed PDF/Image documents and extracts key clinical information using **OCR** and **AI models**.
 
-- **Frontend**: React 18, TypeScript, Vite
-- **Styling**: Tailwind CSS
-- **AI Engine**: Google Gemini API (`gemini-2.5-flash`)
-- **Storage**: Azure Blob Storage (optional) or Local Simulation
-- **Icons**: Lucide React
+The currently deployed version uses:
 
-## 🏃‍♂️ Getting Started Locally
-
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/syam390/AI-fax-Portal.git
-    cd AI-fax-Portal
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Configure Environment**
-    Create a `.env` file in the root directory (optional for local dev, but recommended):
-    ```env
-    # Required for AI processing
-    API_KEY=your_google_gemini_api_key
-    
-    # Optional: For direct Azure uploads. If omitted, uses local simulation.
-    AZURE_STORAGE_SAS_URL=your_azure_container_sas_url
-    ```
-    *Note: In development, you can also rely on the browser injecting these variables if configured in `vite.config.ts`.*
-
-4.  **Run the Development Server**
-    ```bash
-    npm run dev
-    ```
-    Open `http://localhost:5173` in your browser.
-
-## ☁️ Deployment to Azure
-
-This project is optimized for **Azure Static Web Apps**.
-
-### Option A: Deploy via GitHub Actions (Recommended)
-1.  Push this code to a GitHub repository.
-2.  Go to the **Azure Portal** > **Create a resource** > **Static Web App**.
-3.  Select your subscription and link your GitHub account.
-4.  Select the repository (`AI-fax-Portal`) and branch (`main`).
-5.  **Build Presets**: Select `React`.
-6.  **App Location**: `/`
-7.  **Output Location**: `dist`
-8.  Click **Review + Create**.
-
-### Option B: Manual Deploy via Azure CLI
-1.  Build the project:
-    ```bash
-    npm run build
-    ```
-2.  Deploy the `dist` folder using the SWA CLI or Azure Portal "Deploy from Zip" feature.
-
-### 🔑 Configuration in Azure
-Once deployed, go to your Static Web App in the Azure Portal:
-1.  Navigate to **Configuration** (or **Environment variables**).
-2.  Add the following settings:
-    - `API_KEY`: Your Google Gemini API Key.
-    - `AZURE_STORAGE_SAS_URL`: (Optional) The SAS URL for your Azure Storage Container (ensure Write permissions).
-
-## 📂 Project Structure
-
-- `/src/components`: UI components (Dashboard, Detail View, Dialogs).
-- `/src/services`: Integrations with Gemini AI and Azure Storage.
-- `/src/types`: TypeScript definitions for the Referral data model.
-- `/src/context`: React Context for global state (Notifications).
+* **Google Gemini** → Active & Fully Integrated
+* **OpenAI GPT Models** → *Code-ready but deployment pending*
 
 ---
+
+## 🧩 **Key Features**
+
+### ✔ Upload PDF/Image fax documents
+
+Supports drag-and-drop or file selector.
+
+### ✔ OCR (Optical Character Recognition)
+
+Extracts raw text using:
+
+* Tesseract.js (client-side)
+* Gemini Vision OCR
+* (Optional) Azure OCR
+
+### ✔ AI Field Extraction
+
+Transforms raw text into structured JSON fields:
+
+* Patient Name
+* DOB
+* MRN
+* Referral Date
+* Diagnosis Codes
+* Notes
+* Additional metadata
+
+### ✔ Split View Dashboard
+
+Left → Fax list
+Right → Fax preview + AI-extracted JSON
+
+### ✔ Azure Blob Storage (Optional)
+
+Upload PDF/Image to secure cloud storage.
+
+### ✔ Modular AI Architecture
+
+Easily switch between Gemini ↔ OpenAI by changing the model service.
+
+---
+
+# 🧠 **AI Model Support (Status)**
+
+| AI Provider                     | Status                             | Notes                                          |
+| ------------------------------- | ---------------------------------- | ---------------------------------------------- |
+| **Google Gemini**               | ✅ Active (Deployed)                | Currently powering the live AI extraction      |
+| **OpenAI GPT-4o / GPT-4o-mini** | 🟡 Code-Ready (Deployment Pending) | Code included but backend/API not deployed yet |
+
+### Explanation
+
+OpenAI integration is **written in the project**, but not yet deployed to Azure.
+Once the API key & endpoint are added to Azure → the model will work.
+
+---
+
+# 🏛️ **Architecture Diagram**
+
+<img width="1024" height="1536" alt="ChatGPT Image Nov 29, 2025, 12_30_31 AM" src="https://github.com/user-attachments/assets/75d2aec5-3d70-4d02-b191-e63182517cd7" />
+
+
+# 🔄 **System Flow Diagram**
+
+<img width="1024" height="1536" alt="ChatGPT Image Nov 29, 2025, 12_32_10 AM" src="https://github.com/user-attachments/assets/e7b60d42-ac19-40fc-9297-b82543f4cbfd" />
+
+
+# 🛠️ **Tech Stack**
+
+| Layer            | Technology                                               |
+| ---------------- | -------------------------------------------------------- |
+| Frontend         | React 18, TypeScript, Vite                               |
+| Styling          | TailwindCSS                                              |
+| OCR              | Tesseract.js / Gemini OCR                                |
+| AI Models        | Gemini 1.5 (active) / OpenAI GPT-4o (pending deployment) |
+| Storage          | Azure Blob Storage                                       |
+| Hosting          | Azure Static Web Apps                                    |
+| Optional Backend | Azure Functions                                          |
+
+---
+
+# 📁 **Project Structure**
+
+```
+src/
+ ├─ components/
+ │    ├─ UploadBox.tsx
+ │    ├─ DocList.tsx
+ │    ├─ SplitView.tsx
+ │    └─ FieldDisplay.tsx
+ │
+ ├─ services/
+ │    ├─ ocrService.ts
+ │    ├─ aiModelService.ts
+ │    └─ azureUploadService.ts
+ │
+ ├─ context/
+ │    └─ NotificationContext.tsx
+ │
+ ├─ App.tsx
+ └─ main.tsx
+```
+
+---
+
+# ⚙️ *Environment Variables*
+
+### For Gemini (Active)
+
+```
+VITE_GEMINI_API_KEY=your_key
+```
+
+### For OpenAI (Not yet deployed)
+
+```
+VITE_OPENAI_API_KEY=your_key
+```
+
+### Azure Blob
+
+```
+VITE_AZURE_STORAGE_SAS_URL=your_sas_url
+```
+
+---
+
+# 🤖 **AI Service (Gemini - Active)**
+
+```ts
+export async function extractWithGemini(text: string) {
+  // gemini code currently used in deployed environment
+}
+```
+
+---
+
+# 🤖 **AI Service (OpenAI - Ready but not yet deployed)**
+
+```ts
+export async function extractWithOpenAI(text: string) {
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
+  const body = {
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: "Extract medical fields and return JSON." },
+      { role: "user", content: text }
+    ]
+  };
+
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(body)
+  });
+
+  const json = await res.json();
+  return JSON.parse(json.choices[0].message.content);
+}
+```
+
+---
+
+# 🧪 **Workflow Summary**
+
+1. User uploads a document
+2. OCR extracts raw text
+3. Gemini / OpenAI processes text into structured JSON
+4. UI displays preview + results
+5. Optionally uploads document to Azure
+
+---
+
+# 🚀 **Deploy to Azure**
+
+1. Create Azure Static Web App
+2. Connect repository
+3. Build settings:
+
+   ```
+   App location: /
+   Output: dist
+   ```
+4. Add environment variables in **Configuration**
+5. Deploy — live in minutes
+
+
+
+# 🔮 **Future Roadmap**
+
+* 🟢 Deploy OpenAI pipeline
+* 🟢 Add multi-page PDF segmentation
+* 🟢 Add handwriting OCR
+* 🟢 Build Azure Function backend for secure API usage
+* 🟢 Enable database storage & analytics dashboard
+
+# 🎉 **Final Notes**
+
+This project is fully capable of processing medical fax documents using AI.
+Gemini is active today, and OpenAI integration is built-in and ready for deployment whenever needed.
+
 
 **Zen AI Fax** - Simplifying Healthcare Intake.
 
